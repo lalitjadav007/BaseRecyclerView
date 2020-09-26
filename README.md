@@ -22,6 +22,7 @@ Use this in App :
 - you will get your click on item back on adapter.
 
 
+https://youtu.be/DpdMFTeUYSs
 
 
 
