@@ -12,7 +12,7 @@ Step 1. Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.lalitjadav007:BaseRecyclerView:Tag'
+	        implementation 'com.github.lalitjadav007:BaseRecyclerView:0.1.0'
 	}
 
 
