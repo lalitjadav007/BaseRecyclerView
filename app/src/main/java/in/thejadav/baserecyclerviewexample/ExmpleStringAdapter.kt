@@ -1,11 +1,11 @@
 package `in`.thejadav.baserecyclerviewexample
 
-import BaseRvAdapter
+import `in`.thejadav.baserecyclerview.BaseRvAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-class ExmpleStringAdapter(handleId: Int, hiddenViewId: Int, mainViewId: Int, var listener: ExampleStringListener) : BaseRvAdapter<ExampleListHolder, String>(handleId = handleId, hiddenViewId = hiddenViewId, mainViewId = mainViewId) {
+class ExmpleStringAdapter(handleId: Int, hiddenViewId: Int, mainViewId: Int, var listener: ExampleStringListener) : BaseRvAdapter<ExampleListHolder, String>(handleId = handleId, hiddenViewId = hiddenViewId, mainViewId = mainViewId, dragEnabled = true) {
     override fun holderItemClicked(position: Int, viewId: Int?, bundle: Bundle?) {
         listener.deleteItem(list[position])
     }

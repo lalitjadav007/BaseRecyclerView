@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(), ExampleStringListener {
         rvExample.layoutManager = LinearLayoutManager(this)
         rvExample.adapter = adapter
 
-        val myList = arrayListOf("Hello", "Good Morning", "How", "Are", "You")
+        val myList = arrayListOf("Hello", "Good Morning", "How", "Are", "You","Hello", "Good Morning", "How", "Are", "You")
         adapter.replaceAll(myList)
     }
 

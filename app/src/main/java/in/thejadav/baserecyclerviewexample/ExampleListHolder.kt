@@ -1,6 +1,6 @@
 package `in`.thejadav.baserecyclerviewexample
 
-import BaseViewHolder
+import `in`.thejadav.baserecyclerview.BaseViewHolder
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View

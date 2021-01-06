@@ -1,4 +1,5 @@
 package `in`.thejadav.baserecyclerview
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.marginStart
@@ -40,10 +41,12 @@ abstract class BaseViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun openItem(hiddenViewId: Int, mainViewId: Int) {
+        Log.e("open", "holder - start")
         if(hiddenViewId == -1 || mainViewId == -1) return
         val mainView = itemView.findViewById<View>(mainViewId)
         val hiddenView = itemView.findViewById<View>(hiddenViewId)
         mainView.x = hiddenView.x - mainView.width - hiddenView.marginStart
+        Log.e("open", "holder - end")
     }
 
     fun hideItem(hiddenViewId: Int, mainViewId: Int) {

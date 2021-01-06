@@ -1,6 +1,7 @@
 package  `in`.thejadav.baserecyclerview
 
 import android.graphics.Canvas
+import android.util.Log
 import android.view.View
 import androidx.core.view.marginStart
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -86,6 +87,7 @@ class ItemTouchHelperCallback(private val listener: ItemMoveListener, private va
             return
         }
 
+        Log.e("draw", "called--" + viewHolder.adapterPosition)
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 
             mainView.translationX = dX

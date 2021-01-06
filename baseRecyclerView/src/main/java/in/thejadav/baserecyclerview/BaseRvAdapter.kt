@@ -1,5 +1,6 @@
 package `in`.thejadav.baserecyclerview
 
+import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
@@ -7,23 +8,34 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
     ItemMoveListener {
 
     open val list: ArrayList<T> = ArrayList()
-    protected var openedItemPosition = -1
-    private var changeView = false
+    protected var openedItemPosition = 0
+    private var changeView = true
 
     private var touchHelperCallback: ItemTouchHelperCallback = ItemTouchHelperCallback(this, hiddenViewId, mainViewId)
     private var touchHelper: ItemTouchHelper = ItemTouchHelper(touchHelperCallback)
 
     override fun onBindViewHolder(holder: V, position: Int) {
+        bindHolder(holder, position)
+    }
+
+    override fun onBindViewHolder(holder: V, position: Int, payloads: MutableList<Any>) {
+        bindHolder(holder, position)
+    }
+
+    private fun bindHolder(holder: V, position: Int) {
         holder.listener = this
         touchHelperCallback.setDragEnable(dragEnabled)
         holder.useViewForDrag(handleId)
         holder.setItem(list[position])
+        if(position == openedItemPosition){
+            Log.e("open", position.toString())
+            holder.openItem(hiddenViewId, mainViewId)
+        } else {
+            Log.e("close", position.toString())
+            holder.hideItem(hiddenViewId, mainViewId)
+        }
         if(changeView){
-            if(position == openedItemPosition){
-                holder.openItem(hiddenViewId, mainViewId)
-            } else {
-                holder.hideItem(hiddenViewId, mainViewId)
-            }
+
         } else {
             //DO NOTHING
         }
@@ -76,12 +88,13 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
     }
 
     fun setItemOpen(adapterPosition: Int, isOpen: Boolean) {
-        openedItemPosition = if(isOpen){
-            adapterPosition
-        } else {
-            -1
+        val oldPosition = openedItemPosition
+        openedItemPosition = -1
+        notifyItemChanged(oldPosition)
+        if(isOpen){
+            openedItemPosition = adapterPosition
+            notifyItemChanged(openedItemPosition)
         }
-        notifyDataSetChanged()
     }
 
     override fun startDrag(baseViewHolder: BaseViewHolder<*>) {
