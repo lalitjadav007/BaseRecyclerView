@@ -18,10 +18,14 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
         touchHelperCallback.setDragEnable(dragEnabled)
         holder.useViewForDrag(handleId)
         holder.setItem(list[position])
-        if(changeView && position == openedItemPosition){
-            holder.openItem(hiddenViewId, mainViewId)
+        if(changeView){
+            if(position == openedItemPosition){
+                holder.openItem(hiddenViewId, mainViewId)
+            } else {
+                holder.hideItem(hiddenViewId, mainViewId)
+            }
         } else {
-            holder.hideItem(hiddenViewId, mainViewId)
+            //DO NOTHING
         }
     }
 
