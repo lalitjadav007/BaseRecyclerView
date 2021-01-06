@@ -13,9 +13,9 @@ class MainActivity : AppCompatActivity(), ExampleStringListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = ExmpleStringAdapter(R.id.ivHandle, this)
+        adapter = ExmpleStringAdapter(R.id.ivHandle, R.id.child, R.id.parent,this)
         rvExample.layoutManager = LinearLayoutManager(this)
-        rvExample.setAdapter(adapter)
+        rvExample.adapter = adapter
 
         val myList = arrayListOf("Hello", "Good Morning", "How", "Are", "You")
         adapter.replaceAll(myList)
@@ -23,5 +23,9 @@ class MainActivity : AppCompatActivity(), ExampleStringListener {
 
     override fun deleteItem(s: String) {
         Toast.makeText(this, "Delete $s", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun itemDraged() {
+        Toast.makeText(this, "Item Draged", Toast.LENGTH_SHORT).show()
     }
 }

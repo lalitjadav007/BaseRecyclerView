@@ -10,7 +10,7 @@ class ExampleListHolder(view: View) : BaseViewHolder<String>(view) {
 
     init {
         itemView.ivDelete.setOnClickListener {
-            listener?.holderItemClicked(adapterPosition, Bundle())
+            listener?.holderItemClicked(adapterPosition, it.id, Bundle())
         }
     }
 

@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/child"
         android:layout_gravity="end"
+        android:background="#0F72DD"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 

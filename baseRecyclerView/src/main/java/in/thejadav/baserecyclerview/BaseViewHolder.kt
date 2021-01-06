@@ -1,5 +1,6 @@
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.view.marginStart
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
@@ -35,5 +36,16 @@ abstract class BaseViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
 
     open fun itemSelected(){
 
+    }
+
+    fun openItem(hiddenViewId: Int, mainViewId: Int) {
+        val mainView = itemView.findViewById<View>(mainViewId)
+        val hiddenView = itemView.findViewById<View>(hiddenViewId)
+        mainView.x = hiddenView.x - mainView.width - hiddenView.marginStart
+    }
+
+    fun hideItem(hiddenViewId: Int, mainViewId: Int) {
+        val mainView = itemView.findViewById<View>(mainViewId)
+        mainView.x = mainView.marginStart.toFloat()
     }
 }
