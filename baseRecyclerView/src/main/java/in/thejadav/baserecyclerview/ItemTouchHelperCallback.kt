@@ -1,7 +1,5 @@
 package  `in`.thejadav.baserecyclerview
 
-import BaseRvAdapter
-import BaseViewHolder
 import android.graphics.Canvas
 import android.view.View
 import androidx.core.view.marginStart

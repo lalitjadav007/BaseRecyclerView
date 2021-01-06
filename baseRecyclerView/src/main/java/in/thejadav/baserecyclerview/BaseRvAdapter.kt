@@ -1,9 +1,9 @@
-import `in`.thejadav.baserecyclerview.ItemMoveListener
-import `in`.thejadav.baserecyclerview.ItemTouchHelperCallback
+package `in`.thejadav.baserecyclerview
+
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: Int, private  var mainViewId: Int, var handleId: Int = -1) : RecyclerView.Adapter<V>(), BaseHolderListener,
+abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: Int = -1, private  var mainViewId: Int = -1, var handleId: Int = -1) : RecyclerView.Adapter<V>(), BaseHolderListener,
     ItemMoveListener {
 
     open val list: ArrayList<T> = ArrayList()

@@ -1,3 +1,5 @@
+package `in`.thejadav.baserecyclerview
+
 import android.os.Bundle
 
 interface BaseHolderListener {
