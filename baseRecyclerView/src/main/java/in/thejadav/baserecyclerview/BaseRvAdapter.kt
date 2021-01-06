@@ -3,7 +3,7 @@ package `in`.thejadav.baserecyclerview
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: Int = -1, private  var mainViewId: Int = -1, var handleId: Int = -1) : RecyclerView.Adapter<V>(), BaseHolderListener,
+abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: Int = -1, private  var mainViewId: Int = -1, var handleId: Int = -1, var dragEnabled: Boolean = false) : RecyclerView.Adapter<V>(), BaseHolderListener,
     ItemMoveListener {
 
     open val list: ArrayList<T> = ArrayList()
@@ -15,7 +15,7 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
 
     override fun onBindViewHolder(holder: V, position: Int) {
         holder.listener = this
-        touchHelperCallback.setDragEnable(handleId != -1)
+        touchHelperCallback.setDragEnable(dragEnabled)
         holder.useViewForDrag(handleId)
         holder.setItem(list[position])
         if(changeView && position == openedItemPosition){

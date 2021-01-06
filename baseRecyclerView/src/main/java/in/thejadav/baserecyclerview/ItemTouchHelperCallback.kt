@@ -25,10 +25,14 @@ class ItemTouchHelperCallback(private val listener: ItemMoveListener, private va
             openPosition = adapter.getOpenPosition()
         }
 
-        val swapFlags = if (viewHolder.adapterPosition == openPosition) {
-            ItemTouchHelper.RIGHT
+        val swapFlags = if(hiddenViewId == -1 || mainViewId == -1) {
+          0
         } else {
-            ItemTouchHelper.LEFT
+            if (viewHolder.adapterPosition == openPosition) {
+                ItemTouchHelper.RIGHT
+            } else {
+                ItemTouchHelper.LEFT
+            }
         }
         return makeMovementFlags(dragFlags, swapFlags)
     }
