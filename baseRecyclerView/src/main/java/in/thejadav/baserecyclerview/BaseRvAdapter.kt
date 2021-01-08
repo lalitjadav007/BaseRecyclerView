@@ -8,7 +8,7 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
     ItemMoveListener {
 
     open val list: ArrayList<T> = ArrayList()
-    protected var openedItemPosition = 0
+    protected var openedItemPosition = -1
     private var changeView = true
 
     private var touchHelperCallback: ItemTouchHelperCallback = ItemTouchHelperCallback(this, hiddenViewId, mainViewId)
