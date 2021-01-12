@@ -8,6 +8,8 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
     ItemMoveListener {
 
     open val list: ArrayList<T> = ArrayList()
+    open val filteredList: ArrayList<T> = ArrayList()
+    private var searchText = ""
     protected var openedItemPosition = -1
     private var changeView = true
 
@@ -26,18 +28,13 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
         holder.listener = this
         touchHelperCallback.setDragEnable(dragEnabled)
         holder.useViewForDrag(handleId)
-        holder.setItem(list[position])
+        holder.setItem(filteredList[position])
         if(position == openedItemPosition){
             Log.e("open", position.toString())
             holder.openItem(hiddenViewId, mainViewId)
         } else {
             Log.e("close", position.toString())
             holder.hideItem(hiddenViewId, mainViewId)
-        }
-        if(changeView){
-
-        } else {
-            //DO NOTHING
         }
     }
 
@@ -48,27 +45,36 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return filteredList.size
     }
 
     fun replaceAll(newList: ArrayList<T>){
         this.list.clear()
         this.list.addAll(newList)
+        getFilteredData()
+    }
+
+    private fun getFilteredData() {
+        filteredList.clear()
+        filteredList.addAll(list.filter { searchCriteria( searchText , it) })
         notifyDataSetChanged()
     }
 
+    open fun searchCriteria(searchText: String, it: T): Boolean{ return true}
+
     fun addAll(newList: List<T>) {
         addAll(list.size, newList)
+        getFilteredData()
     }
 
     fun addAll(position: Int, newList: List<T>) {
         this.list.addAll(position, newList)
-        notifyDataSetChanged()
+        getFilteredData()
     }
 
     fun removeAll(newList: List<T>) {
         this.list.removeAll(newList)
-        notifyDataSetChanged()
+        getFilteredData()
     }
 
     override fun moveItem(oldPosition: Int, newPosition: Int) {
