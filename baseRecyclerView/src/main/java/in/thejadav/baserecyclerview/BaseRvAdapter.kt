@@ -56,7 +56,11 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
 
     private fun getFilteredData() {
         filteredList.clear()
-        filteredList.addAll(list.filter { searchCriteria( searchText , it) })
+        if(searchText.isEmpty()){
+            filteredList.addAll(list)
+        } else {
+            filteredList.addAll(list.filter { searchCriteria( searchText , it) })
+        }
         notifyDataSetChanged()
     }
 
@@ -105,6 +109,17 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
 
     override fun startDrag(baseViewHolder: BaseViewHolder<*>) {
         touchHelper.startDrag(baseViewHolder)
+    }
+
+    fun clear(){
+        list.clear()
+        filteredList.clear()
+        notifyDataSetChanged()
+    }
+
+    fun search(text: String){
+        searchText = text
+        getFilteredData()
     }
 
     fun getOpenPosition(): Int {
