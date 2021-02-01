@@ -25,4 +25,9 @@ Use this in App :
 https://youtu.be/DpdMFTeUYSs
 
 
+Check Example usage here
+
+https://www.thejadav.in/2021/02/multi-feature-recyclerview-in-android.html
+
+
 
