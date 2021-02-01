@@ -45,13 +45,17 @@ abstract class BaseViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
         if(hiddenViewId == -1 || mainViewId == -1) return
         val mainView = itemView.findViewById<View>(mainViewId)
         val hiddenView = itemView.findViewById<View>(hiddenViewId)
-        mainView.x = hiddenView.x - mainView.width - hiddenView.marginStart
+        mainView.post {
+            mainView.x = hiddenView.x - mainView.width - hiddenView.marginStart
+        }
         Log.e("open", "holder - end")
     }
 
     fun hideItem(hiddenViewId: Int, mainViewId: Int) {
         if(hiddenViewId == -1 || mainViewId == -1) return
         val mainView = itemView.findViewById<View>(mainViewId)
-        mainView.x = mainView.marginStart.toFloat()
+        mainView.post {
+            mainView.x = mainView.marginStart.toFloat()
+        }
     }
 }

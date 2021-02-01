@@ -30,9 +30,9 @@ class ItemTouchHelperCallback(private val listener: ItemMoveListener, private va
           0
         } else {
             if (viewHolder.adapterPosition == openPosition) {
-                ItemTouchHelper.RIGHT
+                ItemTouchHelper.END
             } else {
-                ItemTouchHelper.LEFT
+                ItemTouchHelper.START
             }
         }
         return makeMovementFlags(dragFlags, swapFlags)
@@ -49,7 +49,9 @@ class ItemTouchHelperCallback(private val listener: ItemMoveListener, private va
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        listener.itemSwiped(viewHolder.adapterPosition, direction)
+        Log.e("Draw", "Swiped--${viewHolder.adapterPosition}--${direction.toString()}")
+//        listener.itemSwiped(viewHolder.adapterPosition, direction)
+        listener.itemSwiped(viewHolder.adapterPosition)
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
@@ -88,18 +90,18 @@ class ItemTouchHelperCallback(private val listener: ItemMoveListener, private va
         }
 
         Log.e("draw", "called--" + viewHolder.adapterPosition)
+        Log.e("draw", "ACTION STATE--" + actionState)
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-
-            mainView.translationX = dX
             val adapter = recyclerView.adapter
 
-            if (adapter is BaseRvAdapter<*,*>) {
+            mainView.translationX = dX
 
+            if (adapter is BaseRvAdapter<*,*>) {
                 if (mainView.x + mainView.width > hiddenView.x + hiddenView.width) {
                     mainView.x = mainView.marginStart.toFloat()
                 }
 
-                if (mainView.x + mainView.width < hiddenView.x) {
+                if (mainView.x + mainView.width <= hiddenView.x) {
                     mainView.x = hiddenView.x - mainView.width - hiddenView.marginStart
                 }
             } else {

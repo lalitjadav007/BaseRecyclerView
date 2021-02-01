@@ -11,22 +11,24 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
     open val filteredList: ArrayList<T> = ArrayList()
     private var searchText = ""
     protected var openedItemPosition = -1
-    private var changeView = true
 
     private var touchHelperCallback: ItemTouchHelperCallback = ItemTouchHelperCallback(this, hiddenViewId, mainViewId)
     private var touchHelper: ItemTouchHelper = ItemTouchHelper(touchHelperCallback)
+
+    init {
+        touchHelperCallback.setDragEnable(dragEnabled)
+    }
 
     override fun onBindViewHolder(holder: V, position: Int) {
         bindHolder(holder, position)
     }
 
-    override fun onBindViewHolder(holder: V, position: Int, payloads: MutableList<Any>) {
-        bindHolder(holder, position)
-    }
+//    override fun onBindViewHolder(holder: V, position: Int, payloads: MutableList<Any>) {
+//
+//    }
 
     private fun bindHolder(holder: V, position: Int) {
         holder.listener = this
-        touchHelperCallback.setDragEnable(dragEnabled)
         holder.useViewForDrag(handleId)
         holder.setItem(filteredList[position])
         if(position == openedItemPosition){
@@ -88,23 +90,26 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
         notifyItemMoved(oldPosition, newPosition)
     }
 
-    override fun itemSwiped(position: Int, direction: Int) {
-        changeView = true
-        if(direction == ItemTouchHelper.RIGHT){
-            setItemOpen(position, false)
-        } else {
-            setItemOpen(position, true)
-        }
+    override fun itemSwiped(position: Int) {
+        setItemOpen(position, openedItemPosition != position)
+
+//        if(direction == ItemTouchHelper.START){
+//            setItemOpen(position, true)
+//        } else {
+//            setItemOpen(position, false)
+//        }
     }
 
     fun setItemOpen(adapterPosition: Int, isOpen: Boolean) {
+        Log.e("draw", "ADAPTER -- $adapterPosition -- $isOpen")
         val oldPosition = openedItemPosition
         openedItemPosition = -1
-        notifyItemChanged(oldPosition)
+        notifyItemChanged(oldPosition, null)
         if(isOpen){
             openedItemPosition = adapterPosition
-            notifyItemChanged(openedItemPosition)
+            notifyItemChanged(openedItemPosition, null)
         }
+//        notifyDataSetChanged()
     }
 
     override fun startDrag(baseViewHolder: BaseViewHolder<*>) {
