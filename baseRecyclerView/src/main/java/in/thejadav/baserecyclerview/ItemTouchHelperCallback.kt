@@ -49,7 +49,6 @@ class ItemTouchHelperCallback(private val listener: ItemMoveListener, private va
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        Log.e("Draw", "Swiped--${viewHolder.adapterPosition}--${direction.toString()}")
 //        listener.itemSwiped(viewHolder.adapterPosition, direction)
         listener.itemSwiped(viewHolder.adapterPosition)
     }
@@ -89,8 +88,6 @@ class ItemTouchHelperCallback(private val listener: ItemMoveListener, private va
             return
         }
 
-        Log.e("draw", "called--" + viewHolder.adapterPosition)
-        Log.e("draw", "ACTION STATE--" + actionState)
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             val adapter = recyclerView.adapter
 

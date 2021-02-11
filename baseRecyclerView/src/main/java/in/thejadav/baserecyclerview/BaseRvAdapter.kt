@@ -32,10 +32,8 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
         holder.useViewForDrag(handleId)
         holder.setItem(filteredList[position])
         if(position == openedItemPosition){
-            Log.e("open", position.toString())
             holder.openItem(hiddenViewId, mainViewId)
         } else {
-            Log.e("close", position.toString())
             holder.hideItem(hiddenViewId, mainViewId)
         }
     }
@@ -101,7 +99,6 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
     }
 
     fun setItemOpen(adapterPosition: Int, isOpen: Boolean) {
-        Log.e("draw", "ADAPTER -- $adapterPosition -- $isOpen")
         val oldPosition = openedItemPosition
         openedItemPosition = -1
         notifyItemChanged(oldPosition, null)
