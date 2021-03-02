@@ -127,4 +127,11 @@ abstract class BaseRvAdapter<V: BaseViewHolder<T>, T>(private var hiddenViewId: 
     fun getOpenPosition(): Int {
         return openedItemPosition
     }
+
+    fun notifyOnly(){
+        getFilteredData()
+    }
+
+    fun getSearchedText() = searchText
+
 }

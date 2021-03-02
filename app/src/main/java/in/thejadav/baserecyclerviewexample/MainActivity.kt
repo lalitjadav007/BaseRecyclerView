@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginStart
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +22,8 @@ class MainActivity : AppCompatActivity(), ExampleStringListener {
         val lManager = LinearLayoutManager(this)
         rvExample.layoutManager = lManager
         rvExample.adapter = adapter
-        rvExample.itemAnimator = DefaultItemAnimator()
+        val animator = DefaultItemAnimator()
+        rvExample.itemAnimator = animator
 
         val myList = arrayListOf("Hello", "Good Morning", "How", "Are", "You","Hello", "Good Morning", "How", "Are", "You")
         adapter.replaceAll(myList)
